@@ -1,0 +1,5 @@
+GET https://static.dotgg.gg/onepiece/card/OP02-114.webp HTTP/1.1
+###
+
+GET https://optcgapi.com/api/sets/card/OP02-114/ HTTP/1.1
+###
