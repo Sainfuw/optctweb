@@ -1,4 +1,4 @@
-export interface IPokemonInfo {
+export interface ICardInfo {
   abilities: Ability[]
   base_experience: number
   cries: Cries

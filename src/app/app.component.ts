@@ -8,5 +8,5 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component'
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'pokemon-ssr'
+  title = 'optcgweb'
 }

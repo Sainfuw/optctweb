@@ -2,10 +2,10 @@ export interface IPokeAPIResponse {
   count: number
   next: string
   previous: null
-  results: ISimplePokemon[]
+  results: ISimpleCard[]
 }
 
-export interface ISimplePokemon {
+export interface ISimpleCard {
   id?: string
   name: string
   url: string

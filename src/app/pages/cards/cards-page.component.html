@@ -1,0 +1,15 @@
+<h1 class="text-3xl">Listado de Cardes</h1>
+<h2 class="text-xl">Pagina actual: {{ currentPage() }}</h2>
+
+<hr class="my-4" />
+
+@if (cards().length > 0) {
+<card-list [cards]="cards()" />
+} @else {
+<card-list-skeleton />
+}
+
+<div class="flex justify-between">
+  <button (click)="loadCards(-1)" class="mt-2">Anterior</button>
+  <button (click)="loadCards(+1)" class="mt-2">Siguiente</button>
+</div>

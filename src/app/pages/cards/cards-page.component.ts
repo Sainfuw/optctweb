@@ -8,21 +8,21 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop'
 import { Title } from '@angular/platform-browser'
 import { ActivatedRoute, Router } from '@angular/router'
-import { PokemonListComponent } from '@app/pokemons/components/pokemon-list/pokemon-list.component'
-import { ISimplePokemon } from '@app/pokemons/interfaces/simple-pokemon.interface'
-import { PokemonsService } from '@app/pokemons/services/pokemons.service'
+import { CardListComponent } from '@app/cards/components/card-list/card-list.component'
+import { ISimpleCard } from '@app/cards/interfaces/simple-card.interface'
+import { CardsService } from '@app/cards/services/cards.service'
 import { map, tap } from 'rxjs'
-import { PokemonListSkeletonComponent } from '../../pokemons/components/pokemon-list-skeleton/pokemon-list-skeleton.component'
+import { CardListSkeletonComponent } from '../../cards/components/card-list-skeleton/card-list-skeleton.component'
 
 @Component({
-  selector: 'pokemons-page',
-  imports: [PokemonListComponent, PokemonListSkeletonComponent],
-  templateUrl: './pokemons-page.component.html',
+  selector: 'cards-page',
+  imports: [CardListComponent, CardListSkeletonComponent],
+  templateUrl: './cards-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class PokemonsPageComponent implements OnInit {
-  private pokemonsService = inject(PokemonsService)
-  public pokemons = signal<ISimplePokemon[]>([])
+export default class CardsPageComponent implements OnInit {
+  private cardsService = inject(CardsService)
+  public cards = signal<ISimpleCard[]>([])
 
   private route = inject(ActivatedRoute)
   private router = inject(Router)
@@ -42,28 +42,28 @@ export default class PokemonsPageComponent implements OnInit {
   //   console.log({ isStable })
   // })
 
-  loadPokemons(page = 0): void {
+  loadCards(page = 0): void {
     const pageToLoad = this.currentPage()! + page
-    this.pokemonsService
+    this.cardsService
       .loadPage(pageToLoad)
       .pipe(
         tap(() =>
           this.router.navigate([], { queryParams: { page: pageToLoad } })
         ),
-        tap(() => this.title.setTitle(`Pokemons SSR - Page ${pageToLoad}`))
+        tap(() => this.title.setTitle(`Cards SSR - Page ${pageToLoad}`))
       )
-      .subscribe(this.pokemons.set)
+      .subscribe(this.cards.set)
   }
 
   ngOnInit(): void {
-    this.loadPokemons()
+    this.loadCards()
     // setTimeout(() => {
     //   this.isLoading.set(false)
     // }, 5000)
   }
 
   // ngOnDestroy(): void {
-  //   console.log('PokemonsPageComponent destroyed')
+  //   console.log('CardsPageComponent destroyed')
   //   this.$appStable.unsubscribe()
   // }
 }

@@ -8,37 +8,37 @@ import {
 } from '@angular/core'
 import { Meta, Title } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
-import { IPokemonInfo } from '@app/pokemons/interfaces/pokemon-info.interface'
-import { ISimplePokemon } from '@app/pokemons/interfaces/simple-pokemon.interface'
-import { PokemonsService } from '@app/pokemons/services/pokemons.service'
+import { ICardInfo } from '@app/cards/interfaces/card-info.interface'
+import { ISimpleCard } from '@app/cards/interfaces/simple-card.interface'
+import { CardsService } from '@app/cards/services/cards.service'
 import { tap } from 'rxjs'
 
 @Component({
-  selector: 'pokemon-page',
+  selector: 'card-page',
   imports: [],
-  templateUrl: './pokemon-page.component.html',
+  templateUrl: './card-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class PokemonPageComponent implements OnInit {
+export default class CardPageComponent implements OnInit {
   private route = inject(ActivatedRoute)
-  private pokemonService = inject(PokemonsService)
+  private cardService = inject(CardsService)
 
   private title = inject(Title)
   private meta = inject(Meta)
 
-  simplePokemon = input.required<ISimplePokemon>()
-  pokemon = signal<IPokemonInfo | null>(null)
+  simpleCard = input.required<ISimpleCard>()
+  card = signal<ICardInfo | null>(null)
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')
     if (!id) return
 
-    this.pokemonService
-      .getPokemon(id)
+    this.cardService
+      .getCard(id)
       .pipe(
         tap(({ id, name }) => {
           const pageTitle = `${id}. ${name}`
-          const pageDescription = `Pokemon ${name} details`
+          const pageDescription = `Card ${name} details`
 
           this.title.setTitle(pageTitle)
           this.meta.updateTag({ name: 'description', content: pageDescription })
@@ -49,10 +49,10 @@ export default class PokemonPageComponent implements OnInit {
           })
           this.meta.updateTag({
             name: 'og:image',
-            content: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+            content: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/card/other/official-artwork/${id}.png`,
           })
         })
       )
-      .subscribe(this.pokemon.set)
+      .subscribe(this.card.set)
   }
 }
