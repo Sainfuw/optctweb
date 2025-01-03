@@ -1,0 +1,32 @@
+@if (card() === null ) {
+<div class="flex items-center justify-center h-96">
+  <p class="text-lg font-semibold text-gray-900 dark:text-white">Loading...</p>
+</div>
+} @else { @let myCard = card()!;
+<section class="flex flex-col items-center justify-center">
+  <div class="flex items-center justify-center h-96">
+    <div class="flex flex-col items-center justify-center">
+      <img
+        [src]="myCard.sprites.other?.['official-artwork']?.front_default"
+        [alt]="myCard.name"
+        class="size-60"
+      />
+      @if (myCard.cries.latest) {
+      <audio [src]="myCard.cries.latest" controls></audio>
+      }
+      <h1
+        class="my-4 text-3xl font-semibold text-gray-900 capitalize dark:text-white"
+      >
+        {{ myCard.name }}
+      </h1>
+      <div>
+        @for (ability of myCard.abilities; track ability.ability?.name) {
+        <span class="text-lg font-semibold text-gray-900 dark:text-white">
+          {{ ability.ability?.name }}@if (!$last) {, }
+        </span>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+}

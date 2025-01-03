@@ -4,12 +4,11 @@ import {
   computed,
   input,
 } from '@angular/core'
-import { RouterLink } from '@angular/router'
 import { ISimpleCard } from '@app/cards/interfaces/simple-card.interface'
 
 @Component({
   selector: 'card-card',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './card-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,5 +1,23 @@
+### Image Endpoint
 GET https://static.dotgg.gg/onepiece/card/OP02-114.webp HTTP/1.1
-###
 
+### Card Description Endpoint
 GET https://optcgapi.com/api/sets/card/OP02-114/ HTTP/1.1
-###
+
+### All Sets Endpoint
+GET https://optcgapi.com/api/allSets/ HTTP/1.1
+
+### Set Endpoint
+GET https://optcgapi.com/api/sets/OP-01/ HTTP/1.1
+
+### All Starter Decks Endpoint
+GET https://optcgapi.com/api/allDecks HTTP/1.1
+
+### Starter Deck Endpoint
+GET https://optcgapi.com/api/decks/ST-01/
+
+### Card from Starter Deck Endpoint
+GET https://optcgapi.com/api/decks/card/ST01-016/
+
+### Cards from Set with especific color Endpoint
+GET https://optcgapi.com/api/sets/OP-01/blue/
